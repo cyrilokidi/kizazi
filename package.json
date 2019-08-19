@@ -17,6 +17,15 @@
     "child"
   ],
   "author": "Cyril Okidi <okidicyril@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyrilokidi/kizazi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cyrilokidi/kizazi/issues",
+    "email": "okidicyril@gmail.com"
+  },
+  "homepage": "https://github.com/cyrilokidi/kizazi",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.15"

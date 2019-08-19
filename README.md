@@ -89,7 +89,7 @@ const tree = {
 
 ## Rules
 
-- Kizazi is not used to search for variables, but rather map variables (known location or else may throw errors).
+- Kizazi is not for searching variables, but rather map variables (known location or else may throw errors).
 
 - **Generation** accepts two or more parameters (analogy: a single person doesn't represent an entire generation).
 
@@ -144,4 +144,84 @@ console.log(kizazi.child);
 //LINK: function to read value of child (child's DNA)
 console.log(kizazi.link);
 // fileAAAA
+```
+
+## Addition
+
+### appendTree
+
+Append a new tree map object to an existing tree map.
+
+```js
+const tree = {
+  folderA: {
+    folderA: {
+      folderA: {
+        fileA: "fileAAAA"
+      }
+    },
+    folderB: {
+      folderA: {
+        fileA: "fileABAA"
+      },
+      fileA: "fileABA"
+    },
+    folderC: {
+      fileA: "fileACA"
+    }
+  },
+  fileA: "fileA"
+};
+
+const branch = {
+  folderB: {
+    fileA: "fileBA"
+  }
+};
+
+kizazi.setTree(tree);
+
+console.log(kizazi.getTree);
+
+// { folderA:
+//    { folderA: { folderA: [Object] },
+//      folderB: { folderA: [Object], fileA: 'fileABA' },
+//      folderC: { fileA: 'fileACA' } },
+//   fileA: 'fileA' }
+
+kizazi.appendTree(branch);
+
+console.log(kizazi.getTree);
+
+// { folderA:
+//    { folderA: { folderA: [Object] },
+//      folderB: { folderA: [Object], fileA: 'fileABA' },
+//      folderC: { fileA: 'fileACA' } },
+//   fileA: 'fileA',
+//   folderB: { fileA: 'fileBA' } }
+```
+
+### appendGeneration
+
+Append generation (lineage) to current generation.
+
+```js
+// no default tree map !!
+const kizazi = require("kizazi/bin");
+const folderA = new kizazi();
+const folderB = new kizazi();
+
+folderA.generation("folderA", "folderA");
+folderB.generation("folderA", "folderA", "folderA", "fileA");
+
+console.log(folderA.getGeneration);
+// [ 'folderA', 'folderA' ]
+
+console.log(folderB.getGeneration);
+// [ 'folderA', 'folderA', 'folderA', 'fileA' ]
+
+folderA.appendGeneration("folderA", "fileA");
+
+console.log(folderA.getGeneration);
+// [ 'folderA', 'folderA', 'folderA', 'fileA' ]
 ```

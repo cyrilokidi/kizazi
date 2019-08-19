@@ -104,13 +104,14 @@ kizazi.generation('p1', 'p2', ..., 'pN');
 ## Configuration
 
 **Tree** object could also be defined as a default.
-Define default tree object in [node_modules/kizazi/config.js](config.js "Default tree map object.")
+Define default tree object in [./node_modules/kizazi/config.js](config.js "Default tree map object.")
 
 ```js
+// ./node_modules/kizazi/config.js
 "use strict";
 
 //default tree map
-module.exports.tree = { default: "hello world" };
+module.exports.tree = {};
 ```
 
 ## Appendix
@@ -124,15 +125,23 @@ let kizazi = require("kizazi");
 // generation
 kizazi.generation("folderA", "folderA", "folderA", "fileA");
 
-// ORIGINAL: root of tree (great, great, ... grandparent).
+// Generation: get current lineage set
 console.log(kizazi.getGeneration);
 // ['folderA', 'folderA', 'folderA', 'fileA']
 
-//PARENT: parents to the target child
+// ORIGINAL: root of tree (great, great, ... grandparent)
+console.log(kizazi.original);
+// folderA
+
+//PARENT: parents to the target child (may include grandparents)
 console.log(kizazi.parent);
 // ['folderA', 'folderA', 'folderA']
 
 //CHILD: target child in the lineage
+console.log(kizazi.child);
+// fileA
+
+//LINK: function to read value of child (child's DNA)
 console.log(kizazi.link);
 // fileAAAA
 ```

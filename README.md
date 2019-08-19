@@ -101,5 +101,38 @@ kizazi.generation('p1', 'p2', ..., 'pN');
 
 - Function _instanceName_.**link** has to be called in order to _access_ child value.
 
+## Configuration
+
 **Tree** object could also be defined as a default.
-Define default tree object in [config](config.js "Default tree map object.")
+Define default tree object in [node_modules/kizazi/config.js](config.js "Default tree map object.")
+
+```js
+"use strict";
+
+//default tree map
+module.exports.tree = { default: "hello world" };
+```
+
+## Appendix
+
+```js
+// ANALOGY::
+// only one lineage can be selected.
+// only a single child can be target.
+
+let kizazi = require("kizazi");
+// generation
+kizazi.generation("folderA", "folderA", "folderA", "fileA");
+
+// ORIGINAL: root of tree (great, great, ... grandparent).
+console.log(kizazi.getGeneration);
+// ['folderA', 'folderA', 'folderA', 'fileA']
+
+//PARENT: parents to the target child
+console.log(kizazi.parent);
+// ['folderA', 'folderA', 'folderA']
+
+//CHILD: target child in the lineage
+console.log(kizazi.link);
+// fileAAAA
+```

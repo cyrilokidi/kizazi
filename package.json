@@ -1,0 +1,24 @@
+{
+  "name": "kizazi",
+  "version": "1.0.0",
+  "description": "A simple file system mapper.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kizazi",
+    "generation",
+    "tree",
+    "mapper",
+    "file",
+    "file-system",
+    "fs",
+    "child"
+  ],
+  "author": "Cyril Okidi <okidicyril@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}

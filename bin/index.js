@@ -3,7 +3,8 @@
 class Kizazi {
     constructor(tree = {}) {
         this.tree = tree;
-        this.gen = null;
+        this.gen = null
+        this.lbl = {};
     }
 
     get getTree() {
@@ -20,6 +21,10 @@ class Kizazi {
         return this;
     }
 
+    get getGeneration() {
+        return this.gen;
+    }
+
     generation(...gen) {
         this.gen = gen;
         return this;
@@ -30,8 +35,19 @@ class Kizazi {
         return this;
     }
 
-    get getGeneration() {
-        return this.gen;
+    label(name) {
+        this.gen = this.lbl[name];
+        return this;
+    }
+
+    setLabel(...lbl) {
+        this.lbl[lbl[0]] = lbl.slice(1);
+        return this;
+    }
+
+    appendLabel(...lbl) {
+        this.lbl[lbl[0]] = this.lbl[lbl[0]].concat(lbl.slice(1));
+        return this;
     }
 
     get original() {

@@ -26,12 +26,12 @@ class Kizazi {
     }
 
     generation(...gen) {
-        this.gen = gen;
+        this.gen = gen.flat();
         return this;
     }
 
     appendGeneration(...gen) {
-        this.gen = this.gen.concat(gen);
+        this.gen = this.gen.concat(gen.flat());
         return this;
     }
 
@@ -41,12 +41,14 @@ class Kizazi {
     }
 
     setLabel(...lbl) {
-        this.lbl[lbl[0]] = lbl.slice(1);
+        let tmp = lbl.flat();
+        this.lbl[tmp[0]] = tmp.slice(1);
         return this;
     }
 
     appendLabel(...lbl) {
-        this.lbl[lbl[0]] = this.lbl[lbl[0]].concat(lbl.slice(1));
+        let tmp = lbl.flat();
+        this.lbl[tmp[0]] = this.lbl[tmp[0]].concat(tmp.slice(1));
         return this;
     }
 

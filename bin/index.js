@@ -1,5 +1,4 @@
 'use strict';
-const _ = require('lodash');
 
 class Kizazi {
     constructor(tree = {}) {
@@ -27,7 +26,7 @@ class Kizazi {
     }
 
     appendGeneration(...gen) {
-        this.gen = _.concat(this.gen, gen);
+        this.gen = this.gen.concat(gen);
         return this;
     }
 
@@ -36,22 +35,26 @@ class Kizazi {
     }
 
     get original() {
-        return _.head(this.gen);
+        return this.gen[0];
     }
 
     get parent() {
-        return _.initial(this.gen);
+        return this.gen.slice(0, -1);
     }
 
     get child() {
-        return _.last(this.gen);
+        return this.gen[this.gen.length - 1];
     }
 
     get link() {
+        return this.setLink();
+    }
+
+    setLink() {
         let link = this.tree[this.original];
-        _.map(_.drop(this.parent), p => {
+        this.parent.slice(1).map(p => {
             link = link[p];
-            _.drop(this.parent);
+            this.parent.slice(1);
         });
         return link[this.child];
     }

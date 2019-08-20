@@ -1,6 +1,6 @@
 {
   "name": "kizazi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple variable mapper.",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,5 @@
   },
   "homepage": "https://github.com/cyrilokidi/kizazi",
   "license": "ISC",
-  "dependencies": {
-    "lodash": "^4.17.15"
-  }
+  "dependencies": {}
 }

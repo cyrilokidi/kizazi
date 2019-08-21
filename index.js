@@ -1,10 +1,14 @@
 'use strict';
-//config.
+/**
+ * Config.: Default setting.
+ */
 const config = require('./config');
 
-//bin
+/**
+ * Class
+ */
 const bin = require('./bin');
 const fs = require('./bin/fs');
 
-module.exports = new bin(config.tree);
+module.exports = new bin(config.tree); //default
 module.exports.fs = new fs(config.tree);

@@ -1,7 +1,13 @@
 'use strict';
 const kizazi = require('./index');
-
+/**
+ * Uses file system (instead of JSON Object) as tree.
+ */
 class fs extends kizazi {
+    /**
+     * 
+     * @param {String} tree Data.
+     */
     constructor(tree) {
         super(tree);
         this.tree = tree;
@@ -11,10 +17,9 @@ class fs extends kizazi {
         return this.setLink();
     }
 
+    // Value is file path.
     setLink() {
-        let link = this.tree + this.original;
-        this.parent.slice(1).map(p => link += '/' + p);
-        return link + '/' + this.child;
+        return `${this.tree}/${this.original}/${this.parent.slice(1).join('/')}/${this.child}`;
     }
 };
 

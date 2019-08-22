@@ -7,8 +7,9 @@ const { object, gen, value } = require('.');
 describe('Using Object as tree', () => {
     //set tree
     before(() => kizazi.setTree(object));
-    //set generation
-    before(() => kizazi.generation(gen));
+    //set using label generation
+    before(() => kizazi.setLabel('object', gen));
+    kizazi.label('object');
 
     it('Should return current tree object', () => {
         const test = kizazi.getTree;

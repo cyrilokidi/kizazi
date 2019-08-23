@@ -31,27 +31,27 @@ to this...
 ```js
 // someFile.js
 const G = require("path/to/global").label("folder"); // require global.js
-let fileA = G.appendLabel("fileA");
+let fileA = G.appendLabel("fileA"); // === "../../../fileA"
 let fileB = G.setLabel("fileB", ["fileB"]).appendLabel("fileB"); // ,or set and append label here
 ...
 let fileN = G.appendLabel("fileN");
 ```
 
-using this (a little setup ofcourse)...
+using this (a little setup of course)...
 
 ```js
 // global.js
 const k = require("kizazi").fs; // ,or require("kizazi") for JSON Object
-const tree = "../../../"; // ,or JSON Object
+const tree = __dirname; // ,or JSON Object
 k.setTree(tree); //set new tree
-k.setLabel("folder", ["..", "..", ".."]); //label generation
+k.setLabel("folder", ["..", "..", ".."]); // === "../../../"
 k.setLabel("fileA", ["fileA"]);
 ...
 k.setLabel("fileN", "fileN"); // ,or label without square brackets
 module.exports = k;
 ```
 
-not recommended if the problem is this...
+**not** recommended if the problem is this...
 
 ```js
 // someFile.js
@@ -95,12 +95,13 @@ const tree = {
 ```js
 ...
 console.log(G.getTree);
-// => current tree Object or path
+// => tree Object or path
 
 console.log(G.getGeneration);
 // => ["folderA", "folderA", "folderA", "fileA"];
 
-//append generations
+//append generations (if you dont prefer labelling genration)
+//NOTE: if set only that one generation will be in use
 k.generation('folderA', 'folderA', 'folderA');
 G.appendGeneration('fileA');
 console.log(G.getGeneration);

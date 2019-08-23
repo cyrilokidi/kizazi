@@ -26,7 +26,18 @@ let fileB = "../../../fileB";
 let fileN = "../../../fileN";
 ```
 
-to this (with a little setup, of course)...
+to this...
+
+```js
+// someFile.js
+const G = require("path/to/global").label("folder"); // require global.js
+let fileA = G.appendLabel("fileA");
+let fileB = G.setLabel("fileB", ["fileB"]).appendLabel("fileB"); // ,or set and append label here
+...
+let fileN = G.appendLabel("fileN");
+```
+
+using this (a little setup ofcourse)...
 
 ```js
 // global.js
@@ -38,13 +49,6 @@ k.setLabel("fileA", ["fileA"]);
 ...
 k.setLabel("fileN", "fileN"); // ,or label without square brackets
 module.exports = k;
-
-// someFile.js. require global.js
-const G = require("path/to/global").label("folder");
-let fileA = G.appendLabel("fileA");
-let fileB = G.setLabel("fileB", ["fileB"]).appendLabel("fileB"); // ,or set and append label here
-...
-let fileN = G.appendLabel("fileN");
 ```
 
 not recommended if the problem is this...

@@ -30,22 +30,31 @@ to this (with a little setup, of course)...
 
 ```js
 // global.js
-const kizazi = require("kizazi"); // require("kizazi").fs for filesystem
+const k = require("kizazi").fs; // ,or require("kizazi") for JSON Object
 const tree = "../../../"; // ,or JSON Object
-const k = new kizazi(tree);
-k.setLabel("file", ["..", "..", ".."]);
+k.setTree(tree); //set new tree
+k.setLabel("folder", ["..", "..", ".."]); //label generation
 k.setLabel("fileA", ["fileA"]);
-k.setLabel("fileB", ["fileB"]);
 ...
-k.setLabel("fileN", ["fileN"]);
+k.setLabel("fileN", "fileN"); // ,or label without square brackets
 module.exports = k;
 
 // someFile.js. require global.js
-const G = require("path/to/global").label("file");
+const G = require("path/to/global").label("folder");
 let fileA = G.appendLabel("fileA");
-G.appendLabel("fileB"); //access fileB directly
+let fileB = G.setLabel("fileB", ["fileB"]).appendLabel("fileB"); // ,or set and append label here
 ...
 let fileN = G.appendLabel("fileN");
+```
+
+not recommended if the problem is this...
+
+```js
+// someFile.js
+let fileA = "./fileA";
+let fileB = "../fileB";
+...
+let fileN = "./fileN";
 ```
 
 ## Usage
@@ -53,23 +62,13 @@ let fileN = G.appendLabel("fileN");
 Specifically use **require("kizazi").fs** for filesystem, else use **require("kizazi")** for JSON Object.
 
 ```js
-...
-//set new tree
-k.setTree(tree);
-
-//set new generation
-k.generation("folderA", "folderA", "folderA", "fileA");
-//,or set generation using label
-// k.setLabel("folderA", ["folderA", "folderA", "folderA", "fileA"]);
-
 //access value
-k.link
-// k.label("folderA").link
+fileA.link; // require(fileA.link); to access contents of file
 // => "A/A/A/A"
 ```
 
 ```js
-//define tree as Object
+//define tree as Object example
 const tree = {
   folderA: {
     folderA: {
@@ -91,36 +90,34 @@ const tree = {
 
 ```js
 ...
-console.log(k.getTree);
+console.log(G.getTree);
 // => current tree Object or path
 
-console.log(k.getGeneration);
+console.log(G.getGeneration);
 // => ["folderA", "folderA", "folderA", "fileA"];
 
 //append generations
-k.generation('folderA', 'folderA');
-gen.appendGeneration('folderA', 'fileA');
-console.log(k.getGeneration);
+k.generation('folderA', 'folderA', 'folderA');
+G.appendGeneration('fileA');
+console.log(G.getGeneration);
 // => ["folderA", "folderA", "folderA", "fileA"];
 
 //append labels
-k.setLabel("lblA", ["folderA", "folderA"]);
-k.setLabel("lblB", ["folderA", "fileA"]);
-k.appendLabel("lblA","lblB");
-console.log(k.label("blA").getGeneration);
+k.setLabel("folder", ["folderA", "folderA", "folderA"]);
+k.setLabel("fileA", ["fileA"]);
+G.label("folder").appendLabel("fileA");
+console.log(G.getGeneration);
 // => ["folderA", "folderA", "folderA", "fileA"];
 
-//k.label('lblA');
-
-console.log(k.original);
+console.log(G.original);
 // => folderA
 
-console.log(k.parent);
+console.log(G.parent);
 // => ["folderA", "folderA", "folderA"];
 
-console.log(k.child);
+console.log(G.child);
 // => fileA
 
-console.log(k.link);
+console.log(G.link);
 // => "A/A/A/A";
 ```

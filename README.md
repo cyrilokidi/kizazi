@@ -8,6 +8,12 @@ A simple mapping library.
 $ npm i kizazi
 ```
 
+Run test
+
+```shell
+$ npm test
+```
+
 ## Why
 
 Convert this...

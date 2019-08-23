@@ -6,10 +6,8 @@ const { object, gen, value } = require('.');
 //using json object as tree
 describe('Using Object as tree', () => {
     //set tree
-    before(() => kizazi.setTree(object));
-    //set using label generation
-    before(() => kizazi.setLabel('object', gen));
-    kizazi.label('object');
+    //set and use label
+    beforeEach(() => kizazi.setTree(object).setLabel('label', gen).label('label'));
 
     it('Should return current tree object', () => {
         const test = kizazi.getTree;
@@ -53,6 +51,6 @@ describe('Using Object as tree', () => {
 
     it('Should return value', () => {
         const test = kizazi.link;
-        expect(test, 'Test is [value]').to.be.equal(value);
+        expect(test, 'Test is value').to.be.equal(value);
     });
 });

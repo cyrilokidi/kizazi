@@ -9,7 +9,8 @@ class Kizazi {
     constructor(tree) {
         this.tree = tree;
         this.gen = [];
-        this.lbl = {};
+        this.labelName = null;
+        this.labelList = {};
     }
 
     // Current tree Object (or directory root).
@@ -37,7 +38,7 @@ class Kizazi {
 
     // Current generation.
     get getGeneration() {
-        return this.gen;
+        return this.labelName ? this.labelList[this.labelName] : this.gen;
     }
 
     /**
@@ -62,8 +63,8 @@ class Kizazi {
      * Use label.
      * @param {String} name Label.
      */
-    label(label) {
-        this.gen = this.lbl[label];
+    label(name) {
+        this.labelName = name;
         return this;
     }
 
@@ -71,9 +72,9 @@ class Kizazi {
      * Set label.
      * @param  {...String} lbl Name, ...generation
      */
-    setLabel(...lbl) {
-        let tmp = lbl.flat();
-        this.lbl[tmp[0]] = tmp.slice(1);
+    setLabel(...label) {
+        let tmp = label.flat();
+        this.labelList[tmp[0]] = tmp.slice(1);
         return this;
     }
 
@@ -81,24 +82,24 @@ class Kizazi {
      * Append label to existing label.
      * @param  {...String} lbl Generation extension.
      */
-    appendLabel(target, value) {
-        this.lbl[target] = this.lbl[target].concat(this.lbl[value]);
+    appendLabel(name) {
+        this.labelList[this.labelName] = this.labelList[this.labelName].concat(this.labelList[name]);
         return this;
     }
 
     // Original.
     get original() {
-        return this.gen[0];
+        return this.getGeneration[0];
     }
 
     // Parent.
     get parent() {
-        return this.gen.slice(0, -1);
+        return this.getGeneration.slice(0, -1);
     }
 
     // Child.
     get child() {
-        return this.gen[this.gen.length - 1];
+        return this.getGeneration[this.getGeneration.length - 1];
     }
 
     get link() {

@@ -114,12 +114,15 @@ G.label("folder").appendLabel("fileA");
 console.log(G.getGeneration);
 // => ["folderA", "folderA", "folderA", "fileA"];
 
+//generation[0]
 console.log(G.original);
 // => folderA
 
+//generation.slice(0, generation.length -1)
 console.log(G.parent);
 // => ["folderA", "folderA", "folderA"];
 
+//generation[generation.length - 1]
 console.log(G.child);
 // => fileA
 

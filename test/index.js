@@ -1,10 +1,12 @@
 'use strict';
+// tree
+module.exports.object = require('./data').object; //as object
+module.exports.folder = require('./data').folder; //as directory path
 
-module.exports.object = require('./data').object;
-module.exports.folder = require('./data').folder;
+// generation
+module.exports.gen = ['folderA', 'folderA', 'folderA', 'fileA']; //default
+module.exports.genA = ['folderA', 'folderA']; //first part
+module.exports.genB = ['folderA', 'fileA']; //second part
 
-module.exports.gen = ['folderA', 'folderA', 'folderA', 'fileA'];
-module.exports.genA = ['folderA', 'folderA'];
-module.exports.genB = ['folderA', 'fileA'];
-
-module.exports.value = 'A/A/A/A';
+// value
+module.exports.value = 'A/A/A/A'; //epected value

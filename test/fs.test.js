@@ -6,9 +6,9 @@ const { folder, gen, value } = require('.');
 describe('Using fs as tree', () => {
     //set tree
     //set and use label
-    beforeEach(() => kizazi.setTree(folder).setLabel('label', gen).label('label'));
+    beforeEach(() => kizazi.setTree(folder).setLabel('folder', gen).label('folder'));
 
-    it('Should return current tree as tree object', () => {
+    it('Should return tree', () => {
         const test = kizazi.getTree;
         expect(test, 'Tree is not null').to.not.be.null;
         expect(test, 'Test is not undefined').to.not.be.undefined;

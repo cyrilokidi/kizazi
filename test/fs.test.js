@@ -1,5 +1,5 @@
 'use strict';
-const kizazi = require('..').fs;
+const kizazi = require('..');
 const { expect } = require('chai');
 const { folder, gen, value } = require('.');
 
@@ -8,7 +8,7 @@ describe('Using fs as tree', () => {
     //set and use label
     beforeEach(() => kizazi.setTree(folder).setLabel('folder', gen).label('folder'));
 
-    it('Should return tree', () => {
+    it('Should return tree as folder', () => {
         const test = kizazi.getTree;
         expect(test, 'Tree is not null').to.not.be.null;
         expect(test, 'Test is not undefined').to.not.be.undefined;

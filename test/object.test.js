@@ -1,5 +1,5 @@
 'use strict';
-const kizazi = require('..');
+const kizazi = require('..').object;
 const { expect } = require('chai');
 const { object, gen, value } = require('.');
 
@@ -9,7 +9,7 @@ describe('Using Object as tree', () => {
     //set and use label
     beforeEach(() => kizazi.setTree(object).setLabel('folder', gen).label('folder'));
 
-    it('Should return current tree object', () => {
+    it('Should return current tree as object', () => {
         const test = kizazi.getTree;
         expect(test, 'Tree is not null').to.not.be.null;
         expect(test, 'Tree is not undefined').to.not.be.undefined;

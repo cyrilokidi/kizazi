@@ -1,119 +1,115 @@
-"use strict";
+'use strict';
 /**
  * A simple mapping library.
  */
 class Kizazi {
     /**
-     * @param {Object} tree Data.
+     * Main class.
+     * @param {*} t Path directory.
      */
-    constructor(tree) {
-        this.tree = tree;
+    constructor(t) {
+        this.tree = t;
         this.gen = [];
         this.labelName = null;
         this.labelList = {};
     }
 
-    // Current tree Object (or directory root).
+    /**
+     * Current tree.
+     */
     get getTree() {
         return this.tree;
     }
 
     /**
-     * Set new tree.
-     * @param {Object} tree New tree.
+     * Set new tree
+     * @param {*} t New tree.
      */
-    setTree(tree) {
-        this.tree = tree;
+    setTree(t) {
+        this.tree = t;
         return this;
     }
 
     /**
-     * Append tree to existing tree.
-     * @param {Object} tree Tree extension.
+     * Set new generation
+     * @param  {...String} args New generation.
      */
-    appendTree(tree) {
-        Object.assign(this.tree, tree);
+    generation(...args) {
+        this.gen = args;
         return this;
     }
 
-    // Current generation.
+    /**
+     * Append generation to current generation.
+     * @param  {...String} args Generation extension.
+     */
+    append(...args) {
+        this.gen = this.gen.concat(args);
+        return this;
+    }
+
+    /**
+     * Current generation.
+     */
     get getGeneration() {
-        return this.labelName ? this.labelList[this.labelName] : this.gen;
-    }
-
-    /**
-     * Set generation.
-     * @param  {...String} gen Generation.
-     */
-    generation(...gen) {
-        this.gen = gen.flat();
-        return this;
-    }
-
-    /**
-     * Append generation to existing generation.
-     * @param  {...String} gen Generation extension.
-     */
-    appendGeneration(...gen) {
-        this.gen = this.gen.concat(gen.flat());
-        return this;
-    }
-
-    /**
-     * Use label.
-     * @param {String} name Label.
-     */
-    label(name) {
-        this.labelName = name;
-        return this;
+        return this.gen;
     }
 
     /**
      * Set label.
-     * @param  {...String} lbl Name, ...generation
+     * @param  {...String} args Name, [...generation]
      */
-    setLabel(...label) {
-        let tmp = label.flat();
+    setLabel(...args) {
+        let tmp = args.flat();
         this.labelList[tmp[0]] = tmp.slice(1);
         return this;
     }
 
     /**
-     * Append label to existing label.
-     * @param  {...String} lbl Generation extension.
+     * Merge two labels.
+     * @param {String} first First part.
+     * @param {String} last Last part
      */
-    appendLabel(name) {
-        this.labelList[this.labelName] = this.labelList[this.labelName].concat(this.labelList[name]);
+    merge(first, last) {
+        this.labelList[first] = this.labelList[first].concat(this.labelList[last]);
         return this;
     }
 
-    // Original.
-    get original() {
-        return this.getGeneration[0];
+    /**
+     * Use label.
+     * @param {String} name Label name.
+     */
+    label(name) {
+        this.gen = this.labelList[name];
+        return this;
     }
 
-    // Parent.
+    /**
+     * Parent.
+     */
     get parent() {
         return this.getGeneration.slice(0, -1);
     }
 
-    // Child.
+    /**
+     * Child.
+     */
     get child() {
         return this.getGeneration[this.getGeneration.length - 1];
     }
 
+    /**
+     * Current value.
+     */
     get link() {
         return this.setLink();
     }
 
-    // Set link (value).
+    /**
+     * Set value.
+     */
     setLink() {
-        let link = this.tree[this.original];
-        this.parent.slice(1).map(p => {
-            link = link[p];
-            this.parent.slice(1);
-        });
-        return link[this.child];
+        return `${this.tree}/${this.parent.join('/')}/${this.child}`;
     }
 }
 

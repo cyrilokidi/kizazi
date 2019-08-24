@@ -2,6 +2,9 @@
 /**
  * This is the default tree.
  * Modify to your preferred setting.
- * Only a valid JSON Object or file system path allowed.
+ * Only a file system path or valid JSON Object allowed.
  */
-module.exports.tree = {};
+module.exports.tree = {
+    path: './',
+    object: {}
+};

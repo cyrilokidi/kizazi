@@ -4,7 +4,6 @@
  */
 class Kizazi {
     /**
-     * Main class.
      * @param {*} t Path directory.
      */
     constructor(t) {
@@ -85,20 +84,6 @@ class Kizazi {
     }
 
     /**
-     * Parent.
-     */
-    get parent() {
-        return this.getGeneration.slice(0, -1);
-    }
-
-    /**
-     * Child.
-     */
-    get child() {
-        return this.getGeneration[this.getGeneration.length - 1];
-    }
-
-    /**
      * Current value.
      */
     get link() {
@@ -109,7 +94,7 @@ class Kizazi {
      * Set value.
      */
     setLink() {
-        return `${this.tree}/${this.parent.join('/')}/${this.child}`;
+        return `${this.tree}/${this.getGeneration.join('/')}`;
     }
 }
 

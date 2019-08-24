@@ -34,7 +34,7 @@ class Kizazi {
      * @param  {...String} args New generation.
      */
     generation(...args) {
-        this.gen = args;
+        this.gen = args.flat();
         return this;
     }
 
@@ -43,7 +43,7 @@ class Kizazi {
      * @param  {...String} args Generation extension.
      */
     append(...args) {
-        this.gen = this.gen.concat(args);
+        this.gen = this.gen.concat(args.flat());
         return this;
     }
 

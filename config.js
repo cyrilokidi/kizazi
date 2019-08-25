@@ -5,6 +5,6 @@
  * Only a file system path or valid JSON Object allowed.
  */
 module.exports.tree = {
-    path: './',
-    object: {}
+  path: './',
+  object: {},
 };

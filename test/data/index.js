@@ -1,4 +1,4 @@
 'use strict';
 
-module.exports.object = require('./object');
+module.exports.obj = require('./obj');
 module.exports.folder = __dirname + '/folder';

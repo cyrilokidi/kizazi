@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: install-npm-wee
+          name: install-npm-all
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -21,14 +21,14 @@ jobs:
       - run:
           name: test
           command: npm test
-      - run:
-          name: code-coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+          - run:
+        name: code-coverage
+        command: ./.circleci/artifacts report --reporter=text-lcov
       - store_artifacts:
-          path: test-results.xml
+          path: .circleci/test-results.xml
           prefix: tests
       - store_artifacts:
           path: coverage
           prefix: coverage
       - store_test_results:
-          path: test-results.xml
+          path: .circleci/test-results.xml

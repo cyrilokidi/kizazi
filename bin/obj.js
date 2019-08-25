@@ -1,3 +1,4 @@
+'use strict';
 const kizazi = require('./index');
 /**
  * Uses Object instead of file system path.

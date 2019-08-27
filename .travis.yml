@@ -1,6 +1,6 @@
 language: node_js
 
-before_Script:
+before_script:
   - npm cache clean -f
   - sudo npm install -g n
   - sudo n stable

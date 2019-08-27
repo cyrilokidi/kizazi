@@ -21,6 +21,7 @@ Specifically use **require("kizazi").obj** for JSON Object as tree, else use **r
 Create **global.js** file and configure your module map (custom file name allowed).
 
 ```js
+// global.js
 const k = require('kizazi');
 const tree = __dirname;
 
@@ -41,11 +42,13 @@ Require **global.js** file in file for use.
 let G = require('path/to/global.js');
 let file = G.label('folder').append('file'); // === /folder/folder/folder/file
 let fileB = G.label('folderB').append('folder', 'fileB');
+...
 
 // someOtherFile.js
 let G = require('path/to/global.js');
 let file = G.label('folder').append('file');
 let fileB = G.label('folderB').append('folder', 'fileB');
+...
 ```
 
 Using JSON Object as tree.
@@ -77,10 +80,6 @@ file.link;
 ## Addition
 
 ```js
-//override generation.
-k.generation('folder', 'folder', 'folder', 'folder', 'file');
-// => ['folder', 'folder', 'folder', 'folder', 'file']
-
 //set multiple labels
 k.setLabelMany({
   folder: ['folder', 'folder', 'folder'],
@@ -92,13 +91,16 @@ k.setLabelMany({
   folder: ['folder', 'folder', 'folder'],
   file: ['file'],
 });
-k.merge('folder', 'file');
-k.label('folder');
+G.merge('folder', 'file');
+G.label('folder'); //remember to select label after
 // => ['folder', 'folder', 'folder', 'file']
 
 //must i use append/merge all the time? No.
 k.setLabel('file', ['folder', 'folder', 'folder', 'file']);
-k.label('file');
 // => ['folder', 'folder', 'folder', 'file']
-// or k.generation('folder', 'folder', 'folder', 'file');
+// or G.generation('folder', 'folder', 'folder', 'file');
+
+//override generation.
+G.generation('folder', 'folder', 'folder', 'folder', 'file');
+// => ['folder', 'folder', 'folder', 'folder', 'file']
 ```

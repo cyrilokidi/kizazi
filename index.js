@@ -7,8 +7,8 @@ const { tree } = require('./config');
 /**
  * Class
  */
-const Bin = require('./bin');
-const Obj = require('./bin/obj');
+const Lib = require('./lib');
+const Obj = require('./lib/obj');
 
-module.exports = new Bin(tree.path);
+module.exports = new Lib(tree.path);
 module.exports.obj = new Obj(tree.object);

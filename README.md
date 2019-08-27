@@ -1,6 +1,6 @@
 # Kizazi
 
-A simple mapping library.
+A simple module mapping library.
 
 ## Installation
 
@@ -14,118 +14,91 @@ Run test
 $ npm test
 ```
 
-## Why
+## Usage
 
-Convert this...
+Specifically use **require("kizazi").obj** for JSON Object as tree, else use **require("kizazi")**.
 
-```js
-// someFile.js
-let fileA = "../../../fileA";
-let fileB = "../../../fileB";
-...
-let fileN = "../../../fileN";
-```
-
-to this...
+Create **global.js** file and configure your module map (custom file name allowed).
 
 ```js
-// someFile.js
-const G = require("path/to/global").label("folder"); // require global.js
-let fileA = G.appendLabel("fileA"); // === "../../../fileA"
-let fileB = G.setLabel("fileB", ["fileB"]).appendLabel("fileB"); // ,or set and append label here
-...
-let fileN = G.appendLabel("fileN");
-```
+const k = require('kizazi');
+const tree = __dirname;
 
-using this (a little setup of course)...
+//set tree(project root).
+k.setTree(tree);
 
-```js
-// global.js
-const k = require("kizazi").fs; // ,or require("kizazi") for JSON Object
-const tree = __dirname; // ,or JSON Object
-k.setTree(tree); //set new tree
-k.setLabel("folder", ["..", "..", ".."]); // === "../../../"
-k.setLabel("fileA", ["fileA"]);
-...
-k.setLabel("fileN", "fileN"); // ,or label without square brackets
+//use labels to map module(s)
+k.setLabel('folder', ['folder', 'folder', 'folder']); // === /folder/folder/folder
+k.setLabel('folderB', ['folderB']);
+
 module.exports = k;
 ```
 
-**not** recommended if the problem is this...
+Require **global.js** file in file for use.
 
 ```js
 // someFile.js
-let fileA = "./fileA";
-let fileB = "../fileB";
-...
-let fileN = "./fileN";
+let G = require('path/to/global.js');
+let file = G.label('folder').append('file'); // === /folder/folder/folder/file
+let fileB = G.label('folderB').append('folder', 'fileB');
+
+// someOtherFile.js
+let G = require('path/to/global.js');
+let file = G.label('folder').append('file');
+let fileB = G.label('folderB').append('folder', 'fileB');
 ```
 
-## Usage
-
-Specifically use **require("kizazi").fs** for filesystem, else use **require("kizazi")** for JSON Object.
+Using JSON Object as tree.
 
 ```js
-//access value
-fileA.link; // require(fileA.link); to access contents of file
-// => "A/A/A/A"
-```
-
-```js
-//define tree as Object example
 const tree = {
-  folderA: {
-    folderA: {
-      folderA: {
-        fileA: 'A/A/A/A',
+  folder: {
+    folder: {
+      folder: {
+        file: 'file',
       },
     },
   },
   folderB: {
-    folderA: {
-      fileA: 'B/A/A',
+    folder: {
+      fileB: 'fileB',
     },
-    fileA: 'B/A',
   },
 };
+```
+
+Accessing module value.
+
+```js
+file.link;
+// => 'file'
 ```
 
 ## Addition
 
 ```js
-...
-console.log(G.getTree);
-// => tree Object or path
+//override generation.
+k.generation('folder', 'folder', 'folder', 'folder', 'file');
+// => ['folder', 'folder', 'folder', 'folder', 'file']
 
-console.log(G.getGeneration);
-// => ["folderA", "folderA", "folderA", "fileA"];
+//set multiple labels
+k.setLabelMany({
+  folder: ['folder', 'folder', 'folder'],
+  folderB: ['folderB'],
+});
 
-//append generations (if you dont prefer labelling genration)
-//NOTE: if set only that one generation will be in use
-k.generation('folderA', 'folderA', 'folderA');
-G.appendGeneration('fileA');
-console.log(G.getGeneration);
-// => ["folderA", "folderA", "folderA", "fileA"];
+//merge labels
+k.setLabelMany({
+  folder: ['folder', 'folder', 'folder'],
+  file: ['file'],
+});
+k.merge('folder', 'file');
+k.label('folder');
+// => ['folder', 'folder', 'folder', 'file']
 
-//append labels
-k.setLabel("folder", ["folderA", "folderA", "folderA"]);
-k.setLabel("fileA", ["fileA"]);
-G.label("folder").appendLabel("fileA");
-console.log(G.getGeneration);
-// => ["folderA", "folderA", "folderA", "fileA"];
-
-//generation[0]
-console.log(G.original);
-// => folderA
-
-//generation.slice(0, generation.length -1)
-console.log(G.parent);
-// => ["folderA", "folderA", "folderA"];
-
-//generation[generation.length - 1]
-console.log(G.child);
-// => fileA
-
-console.log(G.link);
-// => "A/A/A/A";
+//must i use append/merge all the time? No.
+k.setLabel('file', ['folder', 'folder', 'folder', 'file']);
+k.label('file');
+// => ['folder', 'folder', 'folder', 'file']
+// or k.generation('folder', 'folder', 'folder', 'file');
 ```

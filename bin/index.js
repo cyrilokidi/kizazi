@@ -65,6 +65,23 @@ class Kizazi {
   }
 
   /**
+   * Set multiple labels.
+   * @param {Object} obj Labels as object.
+   */
+  setLabelMany(obj) {
+    this.labelList = Object.assign(this.labelList, obj);
+    return this;
+  }
+
+  /**
+   * Get current label(s).
+   * @param {String} name 
+   */
+  getLabelList(name = null) {
+    return name ? this.labelList[name] : this.labelList;
+  }
+
+  /**
    * Merge two labels.
    * @param {String} first First part.
    * @param {String} last Last part

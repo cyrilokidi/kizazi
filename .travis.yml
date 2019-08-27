@@ -2,7 +2,3 @@ language: node_js
 
 before_script:
   - npm cache clean -f
-  - sudo npm install -g n
-  - sudo n stable
-  - node --version
-  - node index.js

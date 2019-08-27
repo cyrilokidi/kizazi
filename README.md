@@ -29,6 +29,7 @@ const tree = __dirname;
 k.setTree(tree);
 
 //use labels to map module(s)
+//first parameter is label name, rest is module path.
 k.setLabel('folder', ['folder', 'folder', 'folder']); // === /folder/folder/folder
 k.setLabel('folderB', ['folderB']);
 
@@ -101,6 +102,7 @@ k.setLabel('file', ['folder', 'folder', 'folder', 'file']);
 // or G.generation('folder', 'folder', 'folder', 'file');
 
 //override generation.
+//all parameters are module path.
 G.generation('folder', 'folder', 'folder', 'folder', 'file');
 // => ['folder', 'folder', 'folder', 'folder', 'file']
 ```

@@ -1,19 +1,26 @@
 'use strict';
 const kizazi = require('..');
 const { expect } = require('chai');
-const { gen } = require('.');
+const { gen, override } = require('.');
 
-describe('Inspect generation', () => {
-  //set generation as gen
-  beforeEach(() => kizazi.generation(gen));
+describe('Use generation directly.', () => {
+  beforeEach(() => kizazi.setLabel('folder', gen));
 
-  it('Should return generation', () => {
-    const test = kizazi.getGeneration;
+  it('Should return current generation as gen.', () => {
+    const test = kizazi.label('folder').getGeneration;
+    expect(test, 'Generation is not null.').to.not.be.null;
+    expect(test, 'Generation is not undefined.').to.not.be.undefined;
+    expect(test, 'Generation is an array.').to.be.an('array');
+    expect(test, 'Generation is equivalent to gen.').to.deep.equal(gen);
+    expect(test, 'Generation is equal gen members.').to.include.members(gen);
+  });
 
-    expect(test, 'Generation is not null').to.not.be.null;
-    expect(test, 'Generation is not undefinded').to.not.be.undefined;
-    expect(test, 'Generation is an array').to.be.an('array');
-    expect(test, 'Generation is gen').to.deep.equal(gen);
-    expect(test, 'Generation length is [gen.length]').to.length(gen.length);
+  it('Should return current generation as override.', () => {
+    const test = kizazi.label('folder').generation(override).getGeneration;
+    expect(test, 'Generation is not null.').to.not.be.null;
+    expect(test, 'Generation is not undefined.').to.not.be.undefined;
+    expect(test, 'Generation is an array.').to.be.an('array');
+    expect(test, 'Generation is override').to.deep.equal(override);
+    expect(test, 'Generation is equal override.').to.include.members(override);
   });
 });

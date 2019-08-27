@@ -1,19 +1,26 @@
 'use strict';
 const kizazi = require('..');
 const { expect } = require('chai');
-const { gen, genA, genB } = require('.');
+const { gen, file } = require('.');
 
-describe('Append generation to current generation', () => {
-  //set folder with genA
-  beforeEach(() => kizazi.setLabel('folder', genA).label('folder'));
+describe('Using append.', () => {
+  beforeEach(() => kizazi.setLabel('folder', gen));
 
-  it('Should return generation as genA', () => {
-    const test = kizazi.getGeneration;
-    expect(test, 'Generation is genA').to.deep.equal(genA);
+  it('Should return current generation as folder', () => {
+    const test = kizazi.label('folder').getGeneration;
+    expect(test, 'Generation is not null.').to.not.be.null;
+    expect(test, 'Generation is not undefined.').to.not.be.undefined;
+    expect(test, 'Generation is an array.').to.be.an('array');
+    expect(test, 'Generation is equivalent to gen.').to.deep.equal(gen);
+    expect(test, 'Generation is equal gen members.').to.include.members(gen);
   });
 
-  it('Should return generation as genA + genB', () => {
-    const test = kizazi.append(genB).getGeneration;
-    expect(test, 'Generation is gen').to.deep.equal(gen);
+  it('Should return current generation as file', () => {
+    const test = kizazi.label('folder').generation(file).getGeneration;
+    expect(test, 'Generation is not null.').to.not.be.null;
+    expect(test, 'Generation is not undefined.').to.not.be.undefined;
+    expect(test, 'Generation is an array.').to.be.an('array');
+    expect(test, 'Generation is equivalent to file.').to.deep.equal(file);
+    expect(test, 'Generation is equal file members.').to.include.members(file);
   });
 });

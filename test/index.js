@@ -3,10 +3,11 @@
 module.exports.obj = require('./data').obj; //as object
 module.exports.folder = require('./data').folder; //as directory path
 
-// generation
-module.exports.gen = ['folderA', 'folderA', 'folderA', 'fileA']; //default
-module.exports.genA = ['folderA', 'folderA', 'folderA']; //first part
-module.exports.genB = ['fileA']; //second part
+// module path
+module.exports.gen = ['folder', 'folder', 'folder'];
+module.exports.file = ['file'];
+module.exports.fileB = ['folder', 'fileB'];
+module.exports.override = ['folder', 'folder', 'folder', 'folder', 'file'];
 
-// value
-module.exports.value = 'A/A/A/A'; //epected value
+// module value
+module.exports.value = 'file'; //epected value

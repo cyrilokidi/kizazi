@@ -1,17 +1,16 @@
 'use strict';
 
 module.exports = {
-  folderA: {
-    folderA: {
-      folderA: {
-        fileA: 'A/A/A/A',
+  folder: {
+    folder: {
+      folder: {
+        file: 'file',
       },
     },
   },
   folderB: {
-    folderA: {
-      fileA: 'B/A/A',
+    folder: {
+      fileB: 'fileB',
     },
-    fileA: 'B/A',
   },
 };

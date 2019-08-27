@@ -1,4 +1,4 @@
 language: node_js
 
-before_script:
-  - npm cache clean -f
+node_js: 
+  - "node"

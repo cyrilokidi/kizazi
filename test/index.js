@@ -1,6 +1,6 @@
 'use strict';
 // tree
-module.exports.object = require('./data').object; //as object
+module.exports.obj = require('./data').obj; //as object
 module.exports.folder = require('./data').folder; //as directory path
 
 // generation

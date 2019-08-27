@@ -2,13 +2,13 @@
 /**
  * Config.: Default setting.
  */
-const config = require('./config');
+const { tree } = require('./config');
 
 /**
  * Class
  */
-const bin = require('./bin');
-const fs = require('./bin/fs');
+const Bin = require('./bin');
+const Obj = require('./bin/obj');
 
-module.exports = new bin(config.tree); //default
-module.exports.fs = new fs(config.tree);
+module.exports = new Bin(tree.path);
+module.exports.obj = new Obj(tree.object);

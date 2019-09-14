@@ -29,12 +29,16 @@ describe('Main class', () => {
     describe('Using .setLabelMany', () => {
       it('.mod == value', () => {
         const K = new kizazi(fs);
-        K.setLabel('label', path);
-        K.setLabelMany({ label: path });
+        K.setLabelMany({ label: path, labelB: path });
         const TEST = require(K.label('label').mod);
         TEST.should.not.be.a('null', '[TEST] != null');
         TEST.should.not.be.a('undefined', '[TEST] != undefined');
         TEST.should.be.equal(value, '[TEST] == value');
+
+        const TESTB = require(K.label('labelB').mod);
+        TESTB.should.not.be.a('null', '[TESTB] != null');
+        TESTB.should.not.be.a('undefined', '[TESTB] != undefined');
+        TESTB.should.be.equal(value, '[TESTB] == value');
       });
     });
   });

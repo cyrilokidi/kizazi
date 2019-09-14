@@ -16,20 +16,22 @@ $ npm test
 
 ## Usage
 
-Create **global.js** file and configure your module map (custom file name allowed).
+Create **_global_** file and configure your module map.
 
 ```js
 // global.js
 const k = require('kizazi');
-const tree = __dirname;
+const root = __dirname;
 
-//set tree(project root).
-k.setTree(tree);
+//set root
+k.setRoot(root);
 
 //use labels to map module(s)
-//first parameter is label name, rest is module path.
-k.setLabel('folder', ['folder', 'folder', 'folder']); // === /folder/folder/folder
-k.setLabel('folderB', ['folderB']);
+//first parameter is label name, last is module path.
+k.setLabel('label', 'path/to/module');
+k.setLabel('label1', 'path/to/module');
+...
+k.setLabel('labelN', 'path/to/module');
 
 module.exports = k;
 ```
@@ -39,41 +41,15 @@ Require **global.js** file in file for use.
 ```js
 // someFile.js
 let G = require('path/to/global.js');
-let file = G.label('folder').append('file'); // === /folder/folder/folder/file
-let fileB = G.label('folderB').append('folder', 'fileB');
+let file = require(G.label('label').mod);
+let file1 = require(G.label('label1').mod);
 ...
 
 // someOtherFile.js
 let G = require('path/to/global.js');
-let file = G.label('folder').append('file');
-let fileB = G.label('folderB').append('folder', 'fileB');
+let file = require(G.label('label').mod);
+let file1 = require(G.label('label1').mod);
 ...
-```
-
-Using JSON Object as tree.
-
-```js
-const tree = {
-  folder: {
-    folder: {
-      folder: {
-        file: 'file',
-      },
-    },
-  },
-  folderB: {
-    folder: {
-      fileB: 'fileB',
-    },
-  },
-};
-```
-
-Accessing module value.
-
-```js
-file.link;
-// => 'file'
 ```
 
 ## Addition
@@ -81,26 +57,9 @@ file.link;
 ```js
 //set multiple labels
 k.setLabelMany({
-  folder: ['folder', 'folder', 'folder'],
-  folderB: ['folderB'],
+  label: 'path/to/module',
+  label1: 'path/to/module',
+  ...
+  labelN: 'path/to/module'
 });
-
-//merge labels
-k.setLabelMany({
-  folder: ['folder', 'folder', 'folder'],
-  file: ['file'],
-});
-G.merge('folder', 'file');
-G.label('folder'); //remember to select label after
-// => ['folder', 'folder', 'folder', 'file']
-
-//must i use append/merge all the time? No.
-k.setLabel('file', ['folder', 'folder', 'folder', 'file']);
-// => ['folder', 'folder', 'folder', 'file']
-// or G.generation('folder', 'folder', 'folder', 'file');
-
-//override generation.
-//all parameters are module path.
-G.generation('folder', 'folder', 'folder', 'folder', 'file');
-// => ['folder', 'folder', 'folder', 'folder', 'file']
 ```

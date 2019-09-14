@@ -14,8 +14,8 @@ describe('Main class', () => {
         it('.val == value', () => {
           const K = new kizazi();
           K.setRoot(root);
-          K.setLabel('label', path);
-          const TEST = K.label('label').val;
+          K.setLabel('module1', path);
+          const TEST = K.label('module1').val;
           TEST.should.not.be.a('null', '[TEST] != null');
           TEST.should.not.be.a('undefined', '[TEST] != undefined');
           TEST.should.be.equal(value, '[TEST] == value');
@@ -26,13 +26,13 @@ describe('Main class', () => {
         it('.val == value', () => {
           const K = new kizazi();
           K.setRoot(root);
-          K.setLabelMany({ label: path, labelB: path });
-          const TEST = K.label('label').val;
+          K.setLabelMany({ module1: path, module2: path });
+          const TEST = K.label('module1').val;
           TEST.should.not.be.a('null', '[TEST] != null');
           TEST.should.not.be.a('undefined', '[TEST] != undefined');
           TEST.should.be.equal(value, '[TEST] == value');
 
-          const TESTB = K.label('labelB').val;
+          const TESTB = K.label('module2').val;
           TESTB.should.not.be.a('null', '[TESTB] != null');
           TESTB.should.not.be.a('undefined', '[TESTB] != undefined');
           TESTB.should.be.equal(value, '[TESTB] == value');
@@ -56,8 +56,8 @@ describe('Main class', () => {
         it('.val == value', () => {
           const K = new kizazi();
           K.setRoot(root);
-          K.setLabel('label', pathB);
-          const TEST = K.label('label').app('/file').val;
+          K.setLabel('module1', pathB);
+          const TEST = K.label('module1').app('/file').val;
           TEST.should.not.be.a('null', '[TEST] != null');
           TEST.should.not.be.a('undefined', '[TEST] != undefined');
           TEST.should.be.equal(value, '[TEST] == value');
@@ -70,8 +70,8 @@ describe('Main class', () => {
     it('.path == root + path', () => {
       const K = new kizazi();
       K.setRoot(root);
-      K.setLabel('label', path);
-      const TEST = K.label('label').path;
+      K.setLabel('module1', path);
+      const TEST = K.label('module1').path;
       TEST.should.not.be.a('null', '[TEST] != null');
       TEST.should.not.be.a('undefined', '[TEST] != undefined');
       TEST.should.be.equal(root + path, '[TEST] == root + path');

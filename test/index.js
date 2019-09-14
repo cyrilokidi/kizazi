@@ -1,13 +1,10 @@
 'use strict';
-// tree
+// root
 module.exports.obj = require('./data').obj; //as object
-module.exports.folder = require('./data').folder; //as directory path
+module.exports.fs = require('./data').folder; //as directory path
 
 // module path
-module.exports.gen = ['folder', 'folder', 'folder'];
-module.exports.file = ['file'];
-module.exports.fileB = ['folder', 'fileB'];
-module.exports.override = ['folder', 'folder', 'folder', 'folder', 'file'];
+module.exports.path = '/folder/folder/folder/file';
 
 // module value
-module.exports.value = 'file'; //epected value
+module.exports.value = 'Module value.'; //epected value

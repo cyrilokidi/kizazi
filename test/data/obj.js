@@ -4,13 +4,13 @@ module.exports = {
   folder: {
     folder: {
       folder: {
-        file: 'file',
+        file: 'Module value.',
       },
     },
   },
   folderB: {
     folder: {
-      fileB: 'fileB',
+      file: 'Module value.',
     },
   },
 };

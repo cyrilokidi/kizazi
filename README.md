@@ -2,6 +2,8 @@
 
 A simple module mapping library.
 
+> Please refer to [kizazi-legacy](https://github.com/cyrilokidi/kizazi-legacy) for version <2.x
+
 ## Installation
 
 ```shell

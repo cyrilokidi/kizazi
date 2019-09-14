@@ -16,8 +16,6 @@ $ npm test
 
 ## Usage
 
-Specifically use **require("kizazi").obj** for JSON Object as tree, else use **require("kizazi")**.
-
 Create **global.js** file and configure your module map (custom file name allowed).
 
 ```js

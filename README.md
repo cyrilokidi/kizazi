@@ -30,10 +30,10 @@ k.setRoot(root);
 
 //use labels to map module(s)
 //first parameter is label name, last is module path.
-k.setLabel('label', '/path/to/module');
-k.setLabel('label1', '/path/to/module');
+k.setLabel('module1', '/path/to/module');
+k.setLabel('module2', '/path/to/module');
 ...
-k.setLabel('labelN', '/path/to/module');
+k.setLabel('moduleN', '/path/to/module');
 
 module.exports = k;
 ```
@@ -43,32 +43,31 @@ Require **global.js** file in file for use.
 ```js
 // someFile.js
 let G = require('/path/to/global.js');
-let file = G.label('label').val;
-let file1 = G.label('label1').val;
+let module1 = G.label('module1').val;
+let module2 = G.label('module2').val;
 ...
 
 // someOtherFile.js
 let G = require('/path/to/global.js');
-let file = G.label('label').val;
-let file1 = G.label('label1').val;
+let module1 = G.label('module1').val;
+let module2 = G.label('module2').val;
 ...
 ```
 
-> Access module value using _.val_
-> Access module path using _.path_ (root + path)
+> Access module path using _.path_ (root + path), instead of _.val_
 
 ## Addition
 
 ```js
 //set multiple labels
 k.setLabelMany({
-  label: '/path/to/module',
-  label1: '/path/to/module',
+  module1: '/path/to/module',
+  module2: '/path/to/module',
   ...
-  labelN: '/path/to/module'
+  moduleN: '/path/to/module'
 });
 
 //append path to existing path
-G.label('label').app('/path/extension');
+G.label('module1').app('/path/extension');
 G.app('/path/to/module');
 ```

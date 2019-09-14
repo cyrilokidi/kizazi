@@ -54,7 +54,7 @@ let module2 = G.label('module2').val;
 ...
 ```
 
-> Access module path using _.path_ (root + path), instead of _.val_
+> Access module path using **.path** (root + path), instead of **.val**
 
 ## Addition
 

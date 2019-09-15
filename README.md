@@ -59,7 +59,7 @@ let module2 = G.label('module2').val;
 > Access module path using **.path**, instead of **.val**
 
 ```js
-let module1 = G.label('modal').path;
+let module1 = G.label('module1').path;
 //=> /path/to/module1
 ```
 

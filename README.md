@@ -1,5 +1,7 @@
 # Kizazi
 
+[![Build Status](https://travis-ci.org/cyrilokidi/kizazi.svg?branch=master)](https://travis-ci.org/cyrilokidi/kizazi)
+
 A simple module mapping library.
 
 > Please refer to [kizazi-legacy](https://github.com/cyrilokidi/kizazi-legacy) for version <2.x
